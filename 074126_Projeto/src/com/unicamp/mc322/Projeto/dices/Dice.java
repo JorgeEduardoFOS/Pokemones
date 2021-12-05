@@ -1,4 +1,4 @@
-package com.unicamp.mc322.Projeto;
+package com.unicamp.mc322.Projeto.dices;
 
 public abstract class Dice {
 	protected int size;
@@ -6,7 +6,7 @@ public abstract class Dice {
 	public Dice(int size) {
 		this.size = size;
 	}
-	protected int rollDice() {
+	public int rollDice() {
 		return (int)(size * Math.random() + 1);
 	}
 

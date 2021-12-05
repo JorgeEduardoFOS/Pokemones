@@ -1,17 +1,20 @@
 package com.unicamp.mc322.Projeto;
 
+import com.unicamp.mc322.Projeto.dices.impl.FourFaces;
+
+import java.util.ArrayList;
+
 public class Pokemon {
 	public final boolean SIM = true, NAO = false;
-	public final int CALM = 0, ANNOYED = 1, HOSTILE = 2;
+	public static int CALM = 0, ANNOYED = 1, HOSTILE = 2;
 	private int hostility;
 	private boolean alert;
 	private String name;
 	private int hitPoints, attackPoints, defensePoints, maxCaptureDistance, captureDifficult;
 	private FourFaces dice1 = new FourFaces();//, dice2 = new FourFaces(), dice3 = new FourFaces();
 	private Position position;
-	//type1 enum?
-	//type2 enum?
-	
+	private ArrayList<Type> types;
+
 	public Pokemon(String name) {//types
 		this.name = name;
 	}
@@ -26,6 +29,10 @@ public class Pokemon {
 	public Pokemon(String name, int attackPoints, int defensePoints, Position position) {
 		this(name, attackPoints, defensePoints);
 		this.position = position;
+	}
+	public Pokemon(String name, int attackPoints, int defensePoints, Position position, ArrayList<Type> types) {
+		this(name, attackPoints, defensePoints, position);
+		this.types = types;
 	}
 	public String getName() {
 		return name;
@@ -69,6 +76,14 @@ public class Pokemon {
 	public boolean getAlert() {
 		return alert;
 	}
+	public void setTypes(ArrayList<Type> type) {
+		this.types = types;
+	}
+	public ArrayList<Type> getTypes() {
+		return types;
+	}
+
+	//Implementation
 	public void attackBase(Pokemon pokemon) {
 		///// sem efeito
 		int damage;

@@ -1,6 +1,8 @@
-package com.unicamp.mc322.Projeto;
+package com.unicamp.mc322.Projeto.dices.impl;
 
-public class SixFaces extends Dice{
+import com.unicamp.mc322.Projeto.dices.Dice;
+
+public class SixFaces extends Dice {
 	public SixFaces() {
 		super(6);
 	}

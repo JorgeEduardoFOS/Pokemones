@@ -19,7 +19,7 @@ public class Game {
 		
 	}
 	public void readInput() {
-		String command = input.nextLine();
+		String command = input.next();
 		command = command.toLowerCase();
 		switch(command){
 			case "quit":

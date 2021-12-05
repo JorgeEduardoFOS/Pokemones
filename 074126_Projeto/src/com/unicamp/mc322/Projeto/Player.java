@@ -3,7 +3,8 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Player {
-	private static int playersCount;
+	public final static int VALUE = 1;
+	private static int playersCount, movements;
 	private String name, icon;
 	private SixFaces dice1 = new SixFaces();//, dice2 = new SixFaces();
 	private ArrayList<Pokemon> pokemons = new ArrayList<Pokemon>();
@@ -14,10 +15,12 @@ public class Player {
 	public Player() {
 		name = "Player" + playersCount;
 		++playersCount;
+		position = new Position();
 	}
 	public Player(String name) {
 		this.name = name;
 		++playersCount;
+		position = new Position();
 	}
 	public void setPlayerName(String name) {
 		this.name = name;
@@ -30,24 +33,37 @@ public class Player {
 		String name = input.nextLine();
 		setPlayerName(name);
 		System.out.println("Defina um ícone de dois caracteres para seu herói.");
-		while(icon.length() != 2) {
+		do {
 			icon = input.nextLine();
+			if (icon.length() != 2) {
+				icon = "Pl";
+				break;
+			}
 			switch(icon) {
 				case "  "://difícil de visualizar
+					while (icon == "  ")
+						icon = input.nextLine();
 				case "--"://Ícone reservado para espaço vazio no mapa.
-					icon = input.nextLine();
+					while(icon == "--")
+						icon = input.nextLine();
+					break;
+				default:
+					icon = "Pl";
 					break;
 			}
-		}
+		} while(icon.length() != 2);
 	}
 	public String getPlayerName() {
 		return name;
 	}
+	public String getIcon() {
+		return icon;
+	}
 	public int rollDices() {
-		return dice1.rollDice() + dice1.rollDice();
+		return (movements = dice1.rollDice() + dice1.rollDice());
 	}
 	public void capture(Pokemon pokemon) {//É possível capturar um pokemon hostil?
-		if(position.getZ() == pokemon.getPosition().getZ()) {
+		if(position.getCurrentZ() == pokemon.getPosition().getCurrentZ()) {
 			if(calcDistance(pokemon) <= pokemon.getMaxCaptureDistance()) {
 				if((dice1.rollDice() + dice1.rollDice()) >= 
 						(pokemon.getCaptureDifficult() + pokemon.getMaxCaptureDistance())) {
@@ -72,8 +88,32 @@ public class Player {
 		return chosenPokemon;
 	}
 	private double calcDistance(Pokemon pokemon) {
-		return Math.sqrt(Math.pow(position.getX() - pokemon.getPosition().getX(), 2)
-				+ Math.pow(position.getY() - pokemon.getPosition().getY(), 2));
+		return Math.sqrt(Math.pow(getCurrentX() - pokemon.getPosition().getCurrentX(), 2)
+				+ Math.pow(getCurrentY() - pokemon.getPosition().getCurrentY(), 2));
+	}
+	public void moveUp() {
+		position.moveUp();
+	}
+	public void moveDown() {
+		position.moveDown();
+	}
+	public void moveLeft() {
+		position.moveLeft();
+	}
+	public void moveRight() {
+		position.moveRight();
+	}
+	public int getCurrentX() {
+		return position.getCurrentX();
+	}
+	public int getCurrentY() {
+		return position.getCurrentY();
+	}
+	public int getPreviousX() {
+		return position.getPreviousX();
+	}
+	public int getPreviousY() {
+		return position.getPreviousY();
 	}
 	/*public int rollDices() {
 		return dice1.rollDice() + dice2.rollDice();

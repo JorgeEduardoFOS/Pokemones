@@ -4,18 +4,19 @@ import java.util.ArrayList;
 public class Island {
 	public final static String LIVRE = "--";
 	public final static int VAZIO = 0;
-	public final int MAX = 50;
+	public final int DEFAULT = 20, MAX = 30;
 	private Integer[][] matrix;
 	private int altura, largura;
 	private boolean visited;//a dificuldade de captura é configurada todas as vezes que entra na ilha ou só uma vez?
 	private ArrayList<Pokemon> pokemons = new ArrayList<Pokemon>();
+	private Player player;
 	
 	public Island() {
-		altura = largura = MAX;
+		altura = largura = DEFAULT;
 		matrix = new Integer[altura][largura];
 		for (int i = 0; i < altura; i++) {
 			for ( int j = 0; j < largura; j++) {
-				matrix[i][j]=0;
+				matrix[i][j] = VAZIO;
 			}
 		}		
 	}
@@ -30,12 +31,17 @@ public class Island {
 			matrix = new Integer[altura][largura];
 			for (int i = 0; i < altura; i++) {
 				for ( int j = 0; j < largura; j++) {
-					matrix[i][j]=0;
+					matrix[i][j] = VAZIO;
 				}
 			}
 		}
 	}
-		
+	public int getLargura() {
+		return largura;
+	}
+	public int getAltura() {
+		return altura;
+	}
 	public void removePokemon(Pokemon pokemon) {
 		pokemons.remove(pokemon);
 	}
@@ -51,31 +57,22 @@ public class Island {
 	public void setVisited() {
 		visited = true;
 	}
+	public void movePlayer() {
+		if(player.getCurrentY() >= largura || player.getCurrentX() >= altura)
+			System.out.println("Fora de campo");
+		else
+			matrix[player.getCurrentY()][player.getCurrentX()] = Player.VALUE;
+	}
 	public void printIsland() {
 		for(int i = 0; i < altura; i++) {
 			for(int j = 0; j < largura; j++) {
 				switch (this.matrix[i][j]) {
 				case Island.VAZIO:
-					System.out.print(' ' + Island.LIVRE + ' ');
+					System.out.print(' ' + LIVRE + ' ');
 					break;
-				/*case Stone.VALUE:
-					System.out.print(' ' + Stone.ICONE + ' ');
+				case Player.VALUE:
+					System.out.print(' ' + player.getIcon() + ' ');
 					break;
-				case Predator.VALUE:
-					System.out.print(' ' + Predator.ICONE + ' ');
-					break;
-				case Traps.VALUE:
-					System.out.print(' ' + Traps.ICONE + ' ');
-					break;
-				case Vagalumes.SATISFACTION:
-					System.out.print(' ' + Vagalumes.ICONE + ' ');
-					break;
-				case Grilos.SATISFACTION:
-					System.out.print(' ' + Grilos.ICONE + ' ');
-					break;
-				case Frog.VALUE:
-					System.out.print(' ' + player.getIcone() + ' ');
-					break;*/
 				}	
 			}
 			System.out.println();

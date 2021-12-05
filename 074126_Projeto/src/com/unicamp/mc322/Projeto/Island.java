@@ -6,11 +6,11 @@ public class Island {
 	public final static int VAZIO = 0;
 	public final int MAX = 50;
 	private Integer[][] matrix;
+	private int altura, largura;
 	private boolean visited;//a dificuldade de captura é configurada todas as vezes que entra na ilha ou só uma vez?
 	private ArrayList<Pokemon> pokemons = new ArrayList<Pokemon>();
 	
 	public Island() {
-		int altura, largura;
 		altura = largura = MAX;
 		matrix = new Integer[altura][largura];
 		for (int i = 0; i < altura; i++) {
@@ -25,6 +25,8 @@ public class Island {
 			System.out.println("A mair dimensão permitida é: " + MAX);
 		}
 		else {
+			this.altura = altura;
+			this.largura = largura;
 			matrix = new Integer[altura][largura];
 			for (int i = 0; i < altura; i++) {
 				for ( int j = 0; j < largura; j++) {
@@ -49,6 +51,45 @@ public class Island {
 	public void setVisited() {
 		visited = true;
 	}
+	public void printIsland() {
+		for(int i = 0; i < altura; i++) {
+			for(int j = 0; j < largura; j++) {
+				switch (this.matrix[i][j]) {
+				case Island.VAZIO:
+					System.out.print(' ' + Island.LIVRE + ' ');
+					break;
+				/*case Stone.VALUE:
+					System.out.print(' ' + Stone.ICONE + ' ');
+					break;
+				case Predator.VALUE:
+					System.out.print(' ' + Predator.ICONE + ' ');
+					break;
+				case Traps.VALUE:
+					System.out.print(' ' + Traps.ICONE + ' ');
+					break;
+				case Vagalumes.SATISFACTION:
+					System.out.print(' ' + Vagalumes.ICONE + ' ');
+					break;
+				case Grilos.SATISFACTION:
+					System.out.print(' ' + Grilos.ICONE + ' ');
+					break;
+				case Frog.VALUE:
+					System.out.print(' ' + player.getIcone() + ' ');
+					break;*/
+				}	
+			}
+			System.out.println();
+		}
+			
+	}
+	
 	//Type enum?
+	
+	//////////////
+	//Testes
+	//////////////
+	public static void main(String[] args) {
+		
+	}
 
 }

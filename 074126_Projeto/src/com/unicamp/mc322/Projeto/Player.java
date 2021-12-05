@@ -108,6 +108,31 @@ public class Player {
 		return dice1.rollDice() + dice2.rollDice();
 	}*/
 	
+	public void moveUp() {
+		position.moveUp();
+	}
+	public void moveDown() {
+		position.moveDown();
+	}
+	public void moveLeft() {
+		position.moveLeft();
+	}
+	public void moveRight() {
+		position.moveRight();
+	}
+	public int getCurrentX() {
+		return position.getCurrentX();
+	}
+	public int getCurrentY() {
+		return position.getCurrentY();
+	}
+	public int getPreviousX() {
+		return position.getPreviousX();
+	}
+	public int getPreviousY() {
+		return position.getPreviousY();
+	}
+	
 	//////////////////////////
 	//Área de testes
 	//////////////////////////

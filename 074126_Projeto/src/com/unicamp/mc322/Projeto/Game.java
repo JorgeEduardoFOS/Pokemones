@@ -80,7 +80,7 @@ public class Game {
 	/////
 	public static void main(String[] args) {
 		Game game = new Game();
-		game.readInput();
+		game.start();
 		System.out.println("Acabou.");
 	}
 }

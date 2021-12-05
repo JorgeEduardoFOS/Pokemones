@@ -1,6 +1,5 @@
 package com.unicamp.mc322.Projeto.abilities;
 
-import com.unicamp.mc322.Projeto.Pokemon;
 import com.unicamp.mc322.Projeto.Type;
 
 import java.util.ArrayList;

@@ -7,7 +7,8 @@ import com.unicamp.mc322.Projeto.dices.impl.SixFaces;
 
 public class Player {
 	public final static int VALUE = 1;
-	private static int playersCount, movements;
+	private static int playersCount;
+	private int movements;
 	private String name, icon;
 	private SixFaces dice1 = new SixFaces();//, dice2 = new SixFaces();
 	private ArrayList<Pokemon> pokemons = new ArrayList<Pokemon>();
@@ -20,6 +21,7 @@ public class Player {
 		name = "Player" + playersCount;
 		++playersCount;
 		position = new Position();
+		movements = 0;
 	}
 	public Player(String name) {
 		this.name = name;
@@ -64,9 +66,9 @@ public class Player {
 	}
 
 	public int rollDices() {
-		return dice1.rollDice() + dice1.rollDice();
+		return (movements = dice1.rollDice() + dice1.rollDice());
 	}
-
+	
 	public int getNumberOfMovements() {
 		return movements;
 	}
@@ -107,9 +109,7 @@ public class Player {
 		return Math.sqrt(Math.pow(getCurrentX() - pokemon.getPosition().getCurrentX(), 2)
 				+ Math.pow(getCurrentY() - pokemon.getPosition().getCurrentY(), 2));
 	}
-	/*public int rollDices() {
-		return dice1.rollDice() + dice2.rollDice();
-	}*/
+
 	
 	public void moveUp() {
 		position.moveUp();
@@ -152,15 +152,15 @@ public class Player {
 	//////////////////////////
 
 	public static void main(String[] args) {
-		/*Player p1 = new Player();
-		/*Player p2 = new Player();
+		Player p1 = new Player();
+		//Player p2 = new Player();
 		Player p3 = new Player();
-		Player p4 = new Player("Pierre");
+		Player p4 = new Player("Benedita");
 		System.out.println(p4.getPlayerName());
 		System.out.println(p3.getPlayerName());
-		for(int i = 0; i < 30; i++) {
+		for(int i = 0; i < 40; i++) {
 			System.out.println(p1.rollDices());
-		}*/
-
+		}
+		
 	}
 }

@@ -12,6 +12,7 @@ public class Game {
 		setPlayer();
 		ilha = new Island(player1);
 		System.out.println("Game started!");
+		ilha.movePlayer();
 		while(!exitSelected) {
 			drawBoard();
 			readInput();
@@ -20,12 +21,12 @@ public class Game {
 		System.out.println("Game termineted. Bye!");
 	}
 	public void drawBoard() {
-		ilha.movePlayer();
 		ilha.printIsland();
 	}
 	public void readInput() {
 		if(player1.getNumberOfMovements() < 1) {
 			player1.rollDices();
+			readInput();
 		}
 		else {
 			String command = input2.nextLine();
@@ -67,7 +68,7 @@ public class Game {
 		}			
 	}
 	public void updateBoard() {
-		
+		ilha.movePlayer();
 	}
 	private void setPlayer() {
 		player1 = new Player();

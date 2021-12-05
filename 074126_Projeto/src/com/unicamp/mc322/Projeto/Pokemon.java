@@ -93,7 +93,7 @@ public class Pokemon {
 	public boolean getAlert() {
 		return alert;
 	}
-	public void setTypes(ArrayList<Type> type) {
+	public void setTypes(ArrayList<Type> types) {
 		this.types = types;
 	}
 	public ArrayList<Type> getTypes() {

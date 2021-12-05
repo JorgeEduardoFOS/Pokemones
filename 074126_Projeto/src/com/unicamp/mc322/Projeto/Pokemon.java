@@ -1,5 +1,6 @@
 package com.unicamp.mc322.Projeto;
 
+import com.unicamp.mc322.Projeto.abilities.Abillity;
 import com.unicamp.mc322.Projeto.dices.impl.FourFaces;
 
 import java.util.ArrayList;
@@ -10,13 +11,16 @@ public class Pokemon {
 	private int hostility;
 	private boolean alert;
 	private String name;
-	private int hitPoints, attackPoints, defensePoints, maxCaptureDistance, captureDifficult;
+	private int attackPoints, defensePoints, maxCaptureDistance, captureDifficult;
+	private double hitPoints, maxLife;
 	private FourFaces dice1 = new FourFaces();//, dice2 = new FourFaces(), dice3 = new FourFaces();
 	private Position position;
 	private ArrayList<Type> types;
 
 	public Pokemon(String name) {//types
 		this.name = name;
+		this.hitPoints = 100;
+		maxLife = hitPoints;
 	}
 	public Pokemon(String name, int attackPoints) {
 		this(name);
@@ -25,6 +29,10 @@ public class Pokemon {
 	public Pokemon(String name, int attackPoints, int defensePoints) {
 		this(name, attackPoints);
 		this.defensePoints = defensePoints;
+	}
+	public Pokemon(String name, int attackPoints, int defensePoints, double hitPoints) {
+		this(name, attackPoints, defensePoints);
+		this.hitPoints = hitPoints;
 	}
 	public Pokemon(String name, int attackPoints, int defensePoints, Position position) {
 		this(name, attackPoints, defensePoints);
@@ -37,17 +45,26 @@ public class Pokemon {
 	public String getName() {
 		return name;
 	}
-	private void setHitPoints(int hit) {
+	public double getMaxLife() {
+		return maxLife;
+	}
+	public void setHitPoints(double hit) {
 		hitPoints = hit;
 	}
-	public int getHitPoints() {
+	public double getHitPoints() {
 		return hitPoints;
 	}
 	public int getDefensePoints() {
 		return defensePoints;
 	}
+	public void setDefensePoints(int defensePoints){
+		this.defensePoints = defensePoints;
+	}
 	public int getAttackPoints() {
 		return attackPoints;
+	}
+	public void setAttackPoints(int attackPoints){
+		this.attackPoints = attackPoints;
 	}
 	public void setMaxCaptureDistance() { //public or private?
 		maxCaptureDistance = this.dice1.rollDice();
@@ -86,14 +103,14 @@ public class Pokemon {
 	//Implementation
 	public void attackBase(Pokemon pokemon) {
 		///// sem efeito
-		int damage;
+		double damage;
 		if((damage = pokemon.getHitPoints()  + pokemon.getDefensePoints() - pokemon.getAttackPoints()) <= 0)
 			pokemon.setHitPoints(1);
 		else
 			pokemon.setHitPoints(damage);
 	}
-	public void attackHability(Pokemon pokemon) {
-		//////
+	public void attackHability(Pokemon pokemon, Abillity abillity) {
+		abillity.executeAbility(this);
 	}
 	//////////////////////////
 	//Área de testes

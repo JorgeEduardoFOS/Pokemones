@@ -1,6 +1,8 @@
 package com.unicamp.mc322.Projeto;
+
 import java.util.ArrayList;
 import java.util.Scanner;
+import com.unicamp.mc322.Projeto.abilities.Abillity;
 import com.unicamp.mc322.Projeto.dices.impl.SixFaces;
 
 public class Player {
@@ -12,7 +14,8 @@ public class Player {
 	private Pokemon chosenPokemon;
 	private Position position;
 	private Scanner input = new Scanner(System.in);
-	
+	private ArrayList<Abillity> inventory = new ArrayList<>();
+
 	public Player() {
 		name = "Player" + playersCount;
 		++playersCount;
@@ -55,7 +58,7 @@ public class Player {
 	public String getPlayerName() {
 		return name;
 	}
-	
+
 	public String getIcon() {
 		return icon;
 	}
@@ -63,19 +66,19 @@ public class Player {
 	public int rollDices() {
 		return dice1.rollDice() + dice1.rollDice();
 	}
-	
+
 	public int getNumberOfMovements() {
 		return movements;
 	}
 	public void decreasesMovements() {
 		--movements;
 	}
-	
+
 	public void capture(Pokemon pokemon) {//É possível capturar um pokemon hostil?
 		if (pokemon.getHostility() != Pokemon.HOSTILE) {
 			if(position.getCurrentZ() == pokemon.getPosition().getCurrentZ()) {
 				if(calcDistance(pokemon) <= pokemon.getMaxCaptureDistance()) {
-					if((dice1.rollDice() + dice1.rollDice()) >= 
+					if((dice1.rollDice() + dice1.rollDice()) >=
 						(pokemon.getCaptureDifficult() + pokemon.getMaxCaptureDistance())) {
 						pokemons.add(pokemon);
 					} else
@@ -87,7 +90,7 @@ public class Player {
 		} else
 			System.out.println("para capturar um pokemon hostil, desmaie-o");
 	}
-	
+
 	public void attack(Pokemon pokemon) {
 		////////
 	}
@@ -132,11 +135,22 @@ public class Player {
 	public int getPreviousY() {
 		return position.getPreviousY();
 	}
-	
+
+	public void updateInventory(){
+		for (Abillity abillity : inventory){
+			if (!abillity.isEnabled()) {
+				if (abillity.getEffect() == Abillity.PASSIVE) {
+					abillity.executeAbility(chosenPokemon);
+				}
+			}
+		}
+	}
+
+
 	//////////////////////////
 	//Área de testes
 	//////////////////////////
-	
+
 	public static void main(String[] args) {
 		/*Player p1 = new Player();
 		/*Player p2 = new Player();
@@ -147,6 +161,6 @@ public class Player {
 		for(int i = 0; i < 30; i++) {
 			System.out.println(p1.rollDices());
 		}*/
-		
+
 	}
 }

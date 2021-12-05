@@ -89,7 +89,8 @@ public class Island {
 	//Testes
 	//////////////
 	public static void main(String[] args) {
-		
+		Island fantasy = new Island();
+		fantasy.printIsland();
 	}
 
 }

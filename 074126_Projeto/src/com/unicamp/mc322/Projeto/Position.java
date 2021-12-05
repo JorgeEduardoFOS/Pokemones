@@ -20,4 +20,16 @@ public class Position {
 	public int getZ() {
 		return z;
 	}
+	public void moveUp() {
+		--y;
+	}
+	public void moveDown() {
+		++y;
+	}
+	public void moveLeft() {
+		--x;
+	}
+	public void moveRight() {
+		++x;
+	}
 }

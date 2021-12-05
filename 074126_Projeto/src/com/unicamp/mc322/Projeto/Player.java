@@ -1,38 +1,82 @@
 package com.unicamp.mc322.Projeto;
+import java.util.ArrayList;
+import java.util.Scanner;
 import com.unicamp.mc322.Projeto.dices.impl.SixFaces;
 
-import java.util.ArrayList;
-
 public class Player {
-	private static int playersCount;
-	private String name;
+	public final static int VALUE = 1;
+	private static int playersCount, movements;
+	private String name, icon;
 	private SixFaces dice1 = new SixFaces();//, dice2 = new SixFaces();
 	private ArrayList<Pokemon> pokemons = new ArrayList<Pokemon>();
 	private Pokemon chosenPokemon;
 	private Position position;
+	private Scanner input = new Scanner(System.in);
 	
 	public Player() {
 		name = "Player" + playersCount;
 		++playersCount;
+		position = new Position();
 	}
 	public Player(String name) {
 		this.name = name;
 		++playersCount;
+		position = new Position();
+		movements = 0;
+	}
+	public void setPlayerName(String name) {
+		this.name = name;
+	}
+	public void setPlayerIcon(String icon) {
+		this.icon = icon;
+	}
+	public void setPlayer() {
+		System.out.println("Nome do jogador. Branco default.");
+		String name = input.nextLine();
+		setPlayerName(name);
+		System.out.println("Defina um ícone de dois caracteres para seu herói. Branco default.");
+		do {
+			icon = input.nextLine();
+			switch(icon) {
+			case "  "://difícil de visualizar
+				while (icon == "  ")
+					icon = input.nextLine();
+			case "--"://Ícone reservado para espaço vazio no mapa.
+				while(icon == "--")
+					icon = input.nextLine();
+				break;
+		}
+			if (icon.length() != 2) {
+				icon = "Pl";
+				break;
+			}
+		} while(icon.length() != 2);
 	}
 	public String getPlayerName() {
 		return name;
+	}
+	
+	public String getIcon() {
+		return icon;
 	}
 
 	public int rollDices() {
 		return dice1.rollDice() + dice1.rollDice();
 	}
-
+	
+	public int getNumberOfMovements() {
+		return movements;
+	}
+	public void decreasesMovements() {
+		--movements;
+	}
+	
 	public void capture(Pokemon pokemon) {//É possível capturar um pokemon hostil?
 		if (pokemon.getHostility() != Pokemon.HOSTILE) {
-			if (position.getZ() == pokemon.getPosition().getZ()) {
-				if (calcDistance(pokemon) <= pokemon.getMaxCaptureDistance()) {
-					if ((dice1.rollDice() + dice1.rollDice()) >=
-							(pokemon.getCaptureDifficult() + pokemon.getMaxCaptureDistance())) {
+			if(position.getCurrentZ() == pokemon.getPosition().getCurrentZ()) {
+				if(calcDistance(pokemon) <= pokemon.getMaxCaptureDistance()) {
+					if((dice1.rollDice() + dice1.rollDice()) >= 
+						(pokemon.getCaptureDifficult() + pokemon.getMaxCaptureDistance())) {
 						pokemons.add(pokemon);
 					} else
 						pokemon.increaseHostility();
@@ -43,6 +87,7 @@ public class Player {
 		} else
 			System.out.println("para capturar um pokemon hostil, desmaie-o");
 	}
+	
 	public void attack(Pokemon pokemon) {
 		////////
 	}
@@ -56,8 +101,8 @@ public class Player {
 	}
 
 	private double calcDistance(Pokemon pokemon) {
-		return Math.sqrt(Math.pow(position.getX() - pokemon.getPosition().getX(), 2)
-				+ Math.pow(position.getY() - pokemon.getPosition().getY(), 2));
+		return Math.sqrt(Math.pow(getCurrentX() - pokemon.getPosition().getCurrentX(), 2)
+				+ Math.pow(getCurrentY() - pokemon.getPosition().getCurrentY(), 2));
 	}
 	/*public int rollDices() {
 		return dice1.rollDice() + dice2.rollDice();

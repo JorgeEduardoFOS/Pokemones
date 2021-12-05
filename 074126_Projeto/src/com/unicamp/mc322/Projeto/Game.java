@@ -10,6 +10,7 @@ public class Game {
 	
 	public void start() {
 		exitSelected = false;
+		setPlayer();
 		System.out.println("Game started!");
 		while(!exitSelected) {
 			drawBoard();
@@ -57,6 +58,27 @@ public class Game {
 	public void updateBoard() {
 		
 	}
+	private void setPlayer() {
+		Player player1 = new Player();
+		System.out.println("Nome do jogador");
+		String name = input.nextLine();
+		player1.setPlayerName(name);
+		System.out.println("Defina um ícone de dois caracteres para seu herói.");
+		String icon;
+		while(icon.length() != 2) {
+			icon = input.nextLine();
+			switch(icon) {
+				case "--":
+					icon = input.nextLine();
+					break;
+				default:
+					break;
+			}
+		}
+		
+		
+	}
+		
 	//////
 	//Teste
 	/////

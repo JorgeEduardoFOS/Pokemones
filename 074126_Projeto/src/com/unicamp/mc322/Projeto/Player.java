@@ -1,13 +1,15 @@
 package com.unicamp.mc322.Projeto;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Player {
 	private static int playersCount;
-	private String name;
+	private String name, icon;
 	private SixFaces dice1 = new SixFaces();//, dice2 = new SixFaces();
 	private ArrayList<Pokemon> pokemons = new ArrayList<Pokemon>();
 	private Pokemon chosenPokemon;
 	private Position position;
+	private Scanner input = new Scanner(System.in);
 	
 	public Player() {
 		name = "Player" + playersCount;
@@ -16,6 +18,27 @@ public class Player {
 	public Player(String name) {
 		this.name = name;
 		++playersCount;
+	}
+	public void setPlayerName(String name) {
+		this.name = name;
+	}
+	public void setPlayerIcon(String icon) {
+		this.icon = icon;
+	}
+	public void setPlayer() {
+		System.out.println("Nome do jogador");
+		String name = input.nextLine();
+		setPlayerName(name);
+		System.out.println("Defina um ícone de dois caracteres para seu herói.");
+		while(icon.length() != 2) {
+			icon = input.nextLine();
+			switch(icon) {
+				case "  "://difícil de visualizar
+				case "--"://Ícone reservado para espaço vazio no mapa.
+					icon = input.nextLine();
+					break;
+			}
+		}
 	}
 	public String getPlayerName() {
 		return name;

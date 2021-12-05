@@ -1,6 +1,12 @@
 package com.unicamp.mc322.Projeto;
 import java.util.ArrayList;
 
+import com.unicamp.mc322.lab07.Grilos;
+import com.unicamp.mc322.lab07.Predator;
+import com.unicamp.mc322.lab07.Stone;
+import com.unicamp.mc322.lab07.Traps;
+import com.unicamp.mc322.lab07.Vagalumes;
+
 public class Island {
 	public final static String LIVRE = "--";
 	public final static int VAZIO = 0;
@@ -9,15 +15,34 @@ public class Island {
 	private boolean visited;//a dificuldade de captura é configurada todas as vezes que entra na ilha ou só uma vez?
 	private ArrayList<Pokemon> pokemons = new ArrayList<Pokemon>();
 	
-	public Island(int altura, int largura) {
-		matrix = new Integer[altura][largura];
-		for (int i = 0; i < altura; i++) {
-			for ( int j = 0; j < largura; j++) {
-				matrix[i][j]=0;
+	//default constructor
+	public Island() {
+		int altura, largura;
+		altura = largura = MAX;
+			matrix = new Integer[altura][largura];
+			for (int i = 0; i < altura; i++) {
+				for ( int j = 0; j < largura; j++) {
+					matrix[i][j]=0;
+				}
+			}		
+		}
+		
+		//nondefault constructor
+		public Island(int altura, int largura) {
+			
+			if(altura > MAX || largura > MAX) {
+				System.out.println("A mair dimensão permitida é: " + MAX);
 			}
-		}		
-	}
-	
+			else {
+				matrix = new Integer[altura][largura];
+				for (int i = 0; i < altura; i++) {
+					for ( int j = 0; j < largura; j++) {
+						matrix[i][j]=0;
+					}
+				}
+			}
+		}
+		
 	public void removePokemon(Pokemon pokemon) {
 		pokemons.remove(pokemon);
 	}

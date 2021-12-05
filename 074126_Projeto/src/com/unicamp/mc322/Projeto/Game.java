@@ -1,8 +1,5 @@
 package com.unicamp.mc322.Projeto;
 import java.util.Scanner;
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.lang.Process;
 
 public class Game {
 	private boolean exitSelected;

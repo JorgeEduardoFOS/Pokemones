@@ -63,11 +63,11 @@ public class Player {
 	}
 
 	public int rollDices() {
-		return dice1.rollDice() + dice1.rollDice();
+		return (movements = dice1.rollDice() + dice1.rollDice());
 	}
 	
 	/*public int rollDices() {
-	return dice1.rollDice() + dice2.rollDice();
+	return (movements = dice1.rollDice() + dice2.rollDice());
 	}*/
 	
 	public int getNumberOfMovements() {

@@ -25,12 +25,15 @@ public class Game {
 	}
 	public void readInput() {
 		if(player1.getNumberOfMovements() < 1) {
+			System.out.println("Escolha uma ação. (1)rollDice, (2)Escolher Pokemon, (3)Usar Iten do inventário),"
+					+ "(4)Atacar um pokemon, (5)Tentar capturar pokemon");
 			player1.rollDices();
 			readInput();
 		}
 		else {
 			String command = input2.nextLine();
 			command = command.toLowerCase();
+			System.out.println("Utilize as teclas wasd para caminhar.");
 			switch(command){
 				case "quit":
 					exitSelected = true;

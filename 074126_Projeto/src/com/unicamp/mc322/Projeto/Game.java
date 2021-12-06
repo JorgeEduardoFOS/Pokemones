@@ -54,10 +54,11 @@ public class Game {
 		else {
 			String command = input2.nextLine();
 			command = command.toLowerCase();
-			System.out.println("Utilize as teclas wasd para caminhar.");
+			System.out.println("Utilize as teclas wasd para caminhar e quit para sair.");
 			switch(command){
 				case "quit":
 					exitSelected = true;
+					player1.setMovementToZero();
 					break;
 				case "w":
 					if(player1.getCurrentY() > 0) {

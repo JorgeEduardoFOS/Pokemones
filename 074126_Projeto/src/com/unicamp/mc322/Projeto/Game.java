@@ -25,9 +25,18 @@ public class Game {
 	}
 	public void readInput() {
 		if(player1.getNumberOfMovements() < 1) {
-			System.out.println("Escolha uma ação. (1)rollDice, (2)Escolher Pokemon, (3)Usar Iten do inventário),"
+			System.out.println("Escolha uma ação. (1)rollDice, (2)Escolher Pokemon, (3)Usar Item do inventário),"
 					+ "(4)Atacar um pokemon, (5)Tentar capturar pokemon");
-			int command = input2.nextInt();
+			int command;
+			try {
+				command = input2.nextInt();
+			}
+			catch(java.util.InputMismatchException e) {
+				command = 1;
+			}
+			finally{
+				command = 1;
+			}
 			switch(command) {
 			case 1:
 				player1.rollDices();
@@ -53,25 +62,21 @@ public class Game {
 				case "w":
 					if(player1.getCurrentY() > 0) {
 						player1.moveUp();
-						player1.decreasesMovements();
 					}
 					break;
 				case "s":
 					if(player1.getCurrentY() < ilha.getAltura()) {
 						player1.moveDown();
-						player1.decreasesMovements();
 					}
 					break;
 				case "a":
 					if(player1.getCurrentX() > 0) {
 						player1.moveLeft();
-						player1.decreasesMovements();
 					}
 					break;
 				case "d":
 					if(player1.getCurrentX() < ilha.getLargura()) {
 						player1.moveRight();
-						player1.decreasesMovements();
 					}
 					break;
 				case "k":
@@ -80,7 +85,8 @@ public class Game {
 				default:
 					break;
 			}
-		}			
+			System.out.println(player1.getNumberOfMovements() + " movimentos restantes.");
+		}	
 	}
 	public void updateBoard() {
 		ilha.movePlayer();

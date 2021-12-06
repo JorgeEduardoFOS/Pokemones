@@ -72,7 +72,7 @@ public class Player {
 	public int getNumberOfMovements() {
 		return movements;
 	}
-	public void decreasesMovements() {
+	public void decreaseMovements() {
 		--movements;
 	}
 
@@ -113,15 +113,19 @@ public class Player {
 	
 	public void moveUp() {
 		position.moveUp();
+		this.decreaseMovements();
 	}
 	public void moveDown() {
 		position.moveDown();
+		this.decreaseMovements();
 	}
 	public void moveLeft() {
 		position.moveLeft();
+		this.decreaseMovements();
 	}
 	public void moveRight() {
 		position.moveRight();
+		this.decreaseMovements();
 	}
 	public int getCurrentX() {
 		return position.getCurrentX();

@@ -27,8 +27,19 @@ public class Game {
 		if(player1.getNumberOfMovements() < 1) {
 			System.out.println("Escolha uma ação. (1)rollDice, (2)Escolher Pokemon, (3)Usar Iten do inventário),"
 					+ "(4)Atacar um pokemon, (5)Tentar capturar pokemon");
-			player1.rollDices();
-			readInput();
+			int command = input2.nextInt();
+			switch(command) {
+			case 1:
+				player1.rollDices();
+				break;
+			case 2:
+			case 3:
+			case 4:
+			case 5:
+			default:
+				player1.rollDices();
+				break;			
+			}
 		}
 		else {
 			String command = input2.nextLine();

@@ -75,6 +75,9 @@ public class Player {
 	public void decreaseMovements() {
 		--movements;
 	}
+	public void setMovementToZero() {
+		movements = 0;
+	}
 
 	public void capture(Pokemon pokemon) {//É possível capturar um pokemon hostil?
 		if (pokemon.getHostility() != Pokemon.HOSTILE) {

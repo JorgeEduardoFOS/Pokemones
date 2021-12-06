@@ -36,6 +36,7 @@ public class Game {
 			case 3:
 			case 4:
 			case 5:
+				System.out.println("Não foi implementado. Ação será rollDice.");
 			default:
 				player1.rollDices();
 				break;			
